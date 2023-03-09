@@ -1,0 +1,24 @@
+{
+	"name": "PySpark local cluster",
+	"dockerComposeFile": ["./docker-compose.yaml"],
+    "service": "spark",
+    "workspaceFolder": "/home/jovyan/code",
+
+    "customizations": {
+        "vscode" : {
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true
+            },
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    }
+}

@@ -36,6 +36,12 @@ It uses [Visual Studio Code](https://code.visualstudio.com/) and the [devcontain
 
     ![ipykernel](./media/ipykernel.png)
 
-1. Run each cell in the notebook, in order... see the output of cell 3
+1. Run the first cell... it will take a few seconds to initialize the kernel and complete. You should see a message to browse to the Spark UI... click that for details of how your Spark session executes the work defined in your notebook on your 1-node Spark "cluster"
+
+    ![job output](./media/view_spark_job.png)
+
+1. Run the remaining cells in the notebook, in order... see the output of cell 3
+
+    ![output](./media/output.png)
 
 1. Have fun exploring [PySpark](https://sparkbyexamples.com/pyspark-tutorial/)!

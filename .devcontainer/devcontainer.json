@@ -17,7 +17,8 @@
                 "python.linting.pylintEnabled": true
             },
             "extensions": [
-                "ms-python.python"
+                "ms-python.python",
+		"ms-toolsai.jupyter"
             ]
         }
     }

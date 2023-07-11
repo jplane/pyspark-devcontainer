@@ -1,7 +1,9 @@
 version: '3'
 services:
   spark:
-    image: jupyter/pyspark-notebook
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ..:/home/jovyan/code
     ports:

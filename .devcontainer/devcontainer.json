@@ -18,7 +18,7 @@
             },
             "extensions": [
                 "ms-python.python",
-		"ms-toolsai.jupyter"
+		        "ms-toolsai.jupyter"
             ]
         }
     }

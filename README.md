@@ -1,47 +1,46 @@
 # Local PySpark dev environment
 
-This repo provides everything needed for a self-contained, local PySpark 1-node "cluster" running on your laptop, including a Jupyter notebook environment.
+This repo provides a self-contained, local PySpark development environment that runs on your laptop with Docker, VS Code, and Dev Containers.
 
-It uses [Visual Studio Code](https://code.visualstudio.com/) and the [devcontainer feature](https://code.visualstudio.com/docs/devcontainers/containers) to run the Spark/Jupyter server in Docker, connected to a VS Code dev environment frontend.
+It uses [Visual Studio Code](https://code.visualstudio.com/) and the [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) feature to run Spark and JupyterLab in Docker while keeping the workspace mounted in your editor.
 
 ## Requirements
 
-- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (you don't have to be a Docker super-expert :-))
-
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - Install [Visual Studio Code](https://code.visualstudio.com/download)
-
-- Install the [VS Code Remote Development pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+- Install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
 
 ## Setup
 
-1. Install required tools 
+1. Clone this repository to your laptop.
+2. Open the repo folder in VS Code.
+3. Run the VS Code command palette command `Dev Containers: Reopen in Container`.
+4. Wait for the container to build. The `postCreateCommand` installs the project and development tools from `pyproject.toml`.
+5. Open [test.ipynb](./test.ipynb) in VS Code.
+6. Use the JupyterLab interface at `http://localhost:8888`.
+7. If the notebook asks for a kernel, select the `vscode_pyspark` kernel.
+8. Run the cells in order to explore the local Spark session.
 
-1. Git clone this repo to your laptop
+## Development tooling
 
-1. Open the local repo folder in VS Code
+The project now includes modern Python tooling for local checks and CI:
 
-1. Open the [VS Code command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) and select/type 'Reopen in Container'
+- `ruff` for linting
+- `black` for formatting
+- `pytest` for tests
+- `pre-commit` for consistent hooks
 
-1. Wait while the devcontainer is built and initialized, this may take several minutes
+You can run the checks locally with:
 
-1. Open [test.ipynb](./test.ipynb) in VS Code
+```bash
+python -m pip install -e '.[dev]'
+ruff check .
+black --check .
+pytest
+```
 
-1. If you get an HTTP warning, click 'Yes'
+## Notes
 
-    ![HTTP warning](./media/http_warning.png)
+- The devcontainer now uses a pinned base image (`jupyter/pyspark-notebook:spark-3.5.0`) for reproducible builds.
+- The Spark UI is exposed on port `4040` for debugging and monitoring.
 
-1. Wait a few moments for the Jupyter kernel to initialize... if after about 30 seconds or so the button on the upper-right still says 'Select Kernel', click that and select the option with 'ipykernel'
-
-    ![Choose kernel](./media/select_kernel.png)
-
-    ![ipykernel](./media/ipykernel.png)
-
-1. Run the first cell... it will take a few seconds to initialize the kernel and complete. You should see a message to browse to the Spark UI... click that for details of how your Spark session executes the work defined in your notebook on your 1-node Spark "cluster"
-
-    ![job output](./media/view_spark_job.png)
-
-1. Run the remaining cells in the notebook, in order... see the output of cell 3
-
-    ![output](./media/output.png)
-
-1. Have fun exploring [PySpark](https://sparkbyexamples.com/pyspark-tutorial/)!

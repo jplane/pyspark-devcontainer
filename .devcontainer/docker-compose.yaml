@@ -1,4 +1,3 @@
-version: '3'
 services:
   spark:
     build:
@@ -9,4 +8,4 @@ services:
     ports:
       - "8888:8888"
       - "4040:4040"
-    command: start.sh jupyter notebook --NotebookApp.token='' --NotebookApp.disable_check_xsrf=true --NotebookApp.allow_origin='*' --NotebookApp.ip='0.0.0.0'
+    command: start.sh jupyter lab --ServerApp.token='' --ServerApp.disable_check_xsrf=true --ServerApp.allow_origin='*' --ServerApp.ip='0.0.0.0'

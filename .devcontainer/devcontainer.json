@@ -1,25 +1,44 @@
 {
-	"name": "PySpark local cluster",
-	"dockerComposeFile": ["./docker-compose.yaml"],
-    "service": "spark",
-    "workspaceFolder": "/home/jovyan/code",
-
-    "customizations": {
-        "vscode" : {
-            "settings": {
-                "terminal.integrated.profiles.linux": {
-                    "bash": {
-                        "path": "/bin/bash"
-                    }
-                },
-                "terminal.integrated.defaultProfile.linux": "bash",
-                "python.linting.enabled": true,
-                "python.linting.pylintEnabled": true
-            },
-            "extensions": [
-                "ms-python.python",
-		        "ms-toolsai.jupyter"
-            ]
-        }
+  "name": "PySpark local cluster",
+  "dockerComposeFile": ["./docker-compose.yaml"],
+  "service": "spark",
+  "workspaceFolder": "/home/jovyan/code",
+  "remoteUser": "jovyan",
+  "forwardPorts": [8888, 4040],
+  "portsAttributes": {
+    "8888": {
+      "label": "JupyterLab",
+      "onAutoForward": "openPreview"
+    },
+    "4040": {
+      "label": "Spark UI",
+      "onAutoForward": "openPreview"
     }
+  },
+  "postCreateCommand": "/opt/conda/envs/vscode_pyspark/bin/python -m pip install -e '.[dev]'",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/envs/vscode_pyspark/bin/python",
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestPath": "pytest",
+        "python.analysis.typeCheckingMode": "basic",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "ms-toolsai.jupyter",
+        "charliermarsh.ruff"
+      ]
+    }
+  }
 }

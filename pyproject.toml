@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyspark-devcontainer"
+version = "0.1.0"
+description = "Local PySpark development environment with JupyterLab"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "jupyterlab>=4.2.0,<5",
+  "pandas>=2.2.0,<3",
+  "pyspark==3.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black>=24.4.0",
+  "pre-commit>=3.8.0",
+  "pytest>=8.3.0",
+  "ruff>=0.6.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
